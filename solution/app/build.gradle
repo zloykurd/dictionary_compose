@@ -1,0 +1,107 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "ru.zkdev.dictionary"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "$composeVersion"
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    //region core
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    //endregion
+
+    //region Compose
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    implementation "androidx.activity:activity-compose:$activityComposeVersion"
+    //endregion
+
+    //region Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
+    //endregion
+
+    //region Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$roomVersion"
+    //endregion
+
+    //region Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    //endregion
+
+    //region Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    //endregion
+
+    //region Multidex
+    implementation "androidx.multidex:multidex:$multidexVersion"
+    //endregion
+
+    //region Dagger2 DI
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    //endregion
+
+}
